@@ -65,7 +65,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
             showWeather();
         }
         switchCity.setOnClickListener(this);
-
+        refreshWeather.setOnClickListener(this);
 
     }
 
