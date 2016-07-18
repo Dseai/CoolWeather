@@ -137,7 +137,7 @@ public class ChooseAreaActivity extends Activity {
     }
 
     private void queryCities() {
-        cityList=coolWeatherDB.loadCity();
+        cityList=coolWeatherDB.loadCity(selectedProvince.getId());
         if (cityList.size()>0){
             dataList.clear();
             for (City city:cityList){
@@ -156,7 +156,7 @@ public class ChooseAreaActivity extends Activity {
 
 
     private void queryCountries() {
-        countryList=coolWeatherDB.loadCcountries();
+        countryList=coolWeatherDB.loadCountry(selectedCity.getId());
         if (countryList.size()>0){
             dataList.clear();
             for (Country country:countryList){
@@ -174,9 +174,9 @@ public class ChooseAreaActivity extends Activity {
     private void queryFromSever(final String code,final String type) {
         String address;
         if (!TextUtils.isEmpty(code)){
-            address="http://route.showapi.com/9-7"+code+".xml";
+            address="http://www.weather.com.cn/data/list3/city"+code+".xml";
         }else {
-            address="http://route.showapi.com/9-7.xml";
+            address="http://www.weather.com.cn/data/list3/city.xml";
         }
         showProgressDialog();
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {

@@ -33,6 +33,7 @@ public class Utility {
                     Province province=new Province();
                     province.setProvinceCode(array[0]);
                     province.setProvinceName(array[1]);
+                    //将解析出来的数据存储到Province表中
                     coolWeatherDB.saveProvince(province);
                 }
                 return  true;
@@ -100,7 +101,7 @@ public class Utility {
     }
 
     private static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weatherDesp, String publishTime) {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年m月d日", Locale.CHINA);
         SharedPreferences.Editor editor= PreferenceManager.getDefaultSharedPreferences(context).edit();
         editor.putBoolean("city_selected",true);
         editor.putString("city_name",cityName);

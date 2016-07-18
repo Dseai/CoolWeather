@@ -80,7 +80,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
      * @param countryCode
      */
     private void queryWeatherCode(String countryCode) {
-        String address="http://route.showapi.com/9-7"+countryCode+".xml";
+        String address="http://www.weather.com.cn/data/list3/city"+countryCode+".xml";
         queryFromServer(address,"countryCode");
     }
 
@@ -89,7 +89,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
      * @param weatherCode
      */
     private void  queryWeatherInfo(String weatherCode){
-        String address="http://route.showapi.com/9-7"+weatherCode+".html";
+        String address="http://www.weather.com.cn/data/list3/city"+weatherCode+".html";
         queryFromServer(address,"countryCode");
 
     }
@@ -166,7 +166,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
             case R.id.refresh_weather:
                 publishText.setText("同步中");
                 SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
-                String weatherCode=pref.getString("weanther_code","");
+                String weatherCode=pref.getString("weather_code","");
                 if (!TextUtils.isEmpty(weatherCode)){
                     queryWeatherInfo(weatherCode);
                 }

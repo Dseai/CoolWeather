@@ -41,7 +41,7 @@ public class CoolWeatherDB {
     public void saveProvince(Province province){
         if(province!=null){
             ContentValues values=new ContentValues();
-            values.put("procvince_name",province.getProvinceName());
+            values.put("province_name",province.getProvinceName());
             values.put("province_code",province.getProvinceCode());
             db.insert("Province",null,values);
         }
@@ -74,9 +74,9 @@ public class CoolWeatherDB {
     /**
      * 从数据库中读取某省下所有城市的信息
      */
-    public  List<City>  loadCity(){
+    public  List<City>  loadCity(int provinceId){
         List<City> list=new ArrayList<City>();
-        Cursor cursor=db.query("City",null,"province_id=?",new String[]{String.valueOf(provinceId))},null,null,null);
+        Cursor cursor=db.query("City",null,"province_id=?",new String[] { String.valueOf(provinceId)},null,null,null);
 
         if (cursor.moveToFirst()){
             do {
@@ -105,7 +105,7 @@ public class CoolWeatherDB {
     /**
      * 从数据库中读取某市下所有县的信息
      */
-    public  List<Country>  loadCcountries(){
+    public  List<Country>  loadCountry(int cityId){
         List<Country> list=new ArrayList<Country>();
         Cursor cursor=db.query("Country",null,"city_id=?",new String[] {String.valueOf(cityId)},null,null,null);
 
