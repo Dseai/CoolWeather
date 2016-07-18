@@ -21,7 +21,7 @@ import com.syn.coolweather.util.Utility;
 /**
  * Created by 孙亚楠 on 2016/7/18.
  */
-public class WeatherActivity extends Activity {
+public class WeatherActivity extends Activity implements View.OnClickListener {
     private LinearLayout weatherInfoLayout;
     //用于显示城市名
     private TextView cityNameText;
@@ -55,7 +55,7 @@ public class WeatherActivity extends Activity {
         switchCity=(Button)findViewById(R.id.switch_city);
         refreshWeather=(Button)findViewById(R.id.refresh_weather);
         String countryCode=getIntent().getStringExtra("country_code");
-        if(!TextUtils.equals(countryCode)){
+        if(!TextUtils.isEmpty(countryCode)){
             //有县级别代号时就去查询天气
             publishText.setText("同步中。。");
             weatherInfoLayout.setVisibility(View.VISIBLE);
@@ -72,27 +72,7 @@ public class WeatherActivity extends Activity {
 
 
 
-    @Override
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.switch_city:
-                Intent intent=new Intent(this,ChooseAreaActivity.class);
-                intent.putExtra("from_weather_activity",true);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.refresh_weather:
-               publishText.setText("同步中");
-                SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
-                String weatherCode=pref.getString("weanther_code","");
-                if (!TextUtils.isEmpty(weatherCode)){
-                    queryWeatherInfo(weatherCode);
-                }
-                break;
-            default:break;
-        }
 
-    }
 
     /**
      * 查询县级代号对应的天气
@@ -116,7 +96,7 @@ public class WeatherActivity extends Activity {
     /**
      * 根据传入的地址类型去向服务器查询天气代号或者天气信息
      * @param address
-     * @param countryCode
+     * @param
      */
     private void queryFromServer(final String address, final String type) {
         HttpUtil.sendHttpRequest(address, new HttpCallbackListener() {
@@ -171,4 +151,24 @@ public class WeatherActivity extends Activity {
         cityNameText.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.switch_city:
+                Intent intent=new Intent(this,ChooseAreaActivity.class);
+                intent.putExtra("from_weather_activity",true);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.refresh_weather:
+                publishText.setText("同步中");
+                SharedPreferences pref= PreferenceManager.getDefaultSharedPreferences(this);
+                String weatherCode=pref.getString("weanther_code","");
+                if (!TextUtils.isEmpty(weatherCode)){
+                    queryWeatherInfo(weatherCode);
+                }
+                break;
+            default:break;
+        }
+    }
 }

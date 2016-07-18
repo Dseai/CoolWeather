@@ -97,7 +97,7 @@ public class ChooseAreaActivity extends Activity {
                     selectedCity=cityList.get(position);
                     queryCountries();
                 }else if (currentLevel==LEVEL_COUNTRY){
-                    String countryCode=countryList.get(index).getCountryCode();
+                    String countryCode=countryList.get(position).getCountryCode();
                     Intent intent=new Intent(ChooseAreaActivity.this,WeatherActivity.class);
                     intent.putExtra("country_code",countryCode);
                     startActivity(intent);
